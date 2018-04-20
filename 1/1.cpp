@@ -1,10 +1,8 @@
+//Simulate self-avoiding random walk in 2D and save mean squared start-to-end length for step counts 10...60
 #include <iostream>
 #include <random>
-#include <cstdlib>
 #include <cstring>
 #include <fstream>
-#include <vector>
-#include <numeric>
 
 int saw2d(int steps, std::mt19937& rng)
 {
@@ -13,10 +11,11 @@ int saw2d(int steps, std::mt19937& rng)
 	//create boolean grid big enough for step count
 	bool lattice[2 * steps + 1][2 * steps + 1];
 	//initialize with false (= not visited)
-	memset(lattice, false, sizeof(lattice));
+	std::memset(lattice, false, sizeof(lattice));
 	//set origin at center of lattice
 	int x = steps;
 	int y = steps;
+	lattice[x][y] = true;
 
 	//iterate SAW steps
 	for(int i = 0; i < steps; i++)
@@ -59,19 +58,20 @@ int main()
 	//initialize PRNG
 	std::mt19937 rng;
 	rng.seed(std::random_device()());
-	int size = 1e5; //sample size
-	int output[size]; //temporary output array
+	size_t size = 1e6; //sample size
+	long result; //temporary output array
 	std::ofstream f;             //file to save results to
 	f.open ("build/output.txt"); //file to save results to
 	//iterate step counts
 	for(int j = 10; j <= 60; j += 5)
 	{
+		result = 0;
 		std::cout << j << "... " << std::flush;
 		//iterate samples and save to temp array
-		for(int i = 0; i < size; i++)
-			output[i] = saw2d(j, rng);
+		for(size_t i = 0; i < size; i++)
+			result += saw2d(j, rng);
 		//compute average R_N^2 and save to file
-		f << j << " " << std::accumulate(output, output + size, 0) / (double) size << std::endl;
+		f << j << " " << result / (double) size << std::endl;
 	}
 	std::cout << std::endl;
 	return EXIT_SUCCESS;
