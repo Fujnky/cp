@@ -7,26 +7,24 @@
 
 
 \begin{document}
-\maketitle
+%\maketitle
 
 \section*{Aufgabe 1}
 \subsection*{a)}
-% \begin{figure}
-%   \includegraphics{build/1.pdf}
-%   \caption{Plot für $R_N(N)$.}
-% \end{figure}
+ \begin{figure}
+   \includegraphics{build/1.pdf}
+   \caption{Plot für $R_N$.}
+ \end{figure}
 \subsection*{b)}
-Damit sich eine Gerade ergbit, muss $R_N$ gegen $N^{\frac{1}{4}}$ aufgetragen werden.
+Damit sich eine Gerade ergibt, muss $R_N$ gegen $N^{0.52}$ aufgetragen werden.
 
 \section*{Aufgabe 2}
-
+\subsection*{a)}
+Ergebnisse siehe Programmausgabe.
 \subsection*{b)}
-Für $T_1=-1$  verwende Substitution $x=\frac{1}{u}$:
+Verwende Substitution $x=\tan\left(u\right)$:
 \begin{align*}
-\Rightarrow -\int_0^{\frac{1}{T}} \frac{1}{\sqrt{\pi}}\frac{1}{u^2}\exp{-\frac{1}{u^2}}\symup{d} u
+\Rightarrow \int_{-\frac{\pi}{2}}^{\arctan(T)} \frac{1}{\sqrt{\pi}\cos(x)^2} \exp(-\tan(u)^2) \symup{d} u
 \end{align*}
-Für $T_2=\num{1.1631}$ und $T_3=\infty$  verwende Substitution $x=\tan\left(u\right)$:
-\begin{align*}
-\Rightarrow \int_{\frac{-\pi}{2}}^{\arctan(T)} \frac{1}{\sqrt{\pi}}\frac{1}{\cos(x)^2}\exp{-\tan\left(u\right)^2}\symup{d} u
-\end{align*}
+Ergebnisse siehe Programmausgabe.
 \end{document}

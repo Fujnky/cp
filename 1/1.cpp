@@ -63,7 +63,7 @@ int main()
 	std::ofstream f;             //file to save results to
 	f.open ("build/output.txt"); //file to save results to
 	//iterate step counts
-	for(int j = 10; j <= 60; j += 5)
+	for(int j = 5; j <= 3000; j += 5)
 	{
 		result = 0;
 		std::cout << j << "... " << std::flush;
