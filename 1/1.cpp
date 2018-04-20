@@ -58,7 +58,7 @@ int main()
 	//initialize PRNG
 	std::mt19937 rng;
 	rng.seed(std::random_device()());
-	size_t size = 1e6; //sample size
+	size_t size = 1e5; //sample size
 	long result; //temporary output array
 	std::ofstream f;             //file to save results to
 	f.open ("build/output.txt"); //file to save results to
