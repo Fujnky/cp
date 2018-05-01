@@ -8,13 +8,13 @@ class RNG
     virtual double getRndDouble() = 0;
 };
 
-
+template <typename T>
 class XORShift : public RNG
 {
 public:
-  XORShift(uint16_t x, uint16_t a, uint16_t b, uint16_t c) : x(x), a(a), b(b), c(c) {};
+  XORShift(T x, T a, T b, T c) : x(x), a(a), b(b), c(c) {};
 
-  uint16_t getRnd()
+  T getRnd()
   {
     x ^= (x << a);
     x ^= (x >> b);
@@ -24,11 +24,11 @@ public:
 
   double getRndDouble()
   {
-    return getRnd() / (double) std::numeric_limits<uint16_t>::max();
+    return getRnd() / (double) std::numeric_limits<T>::max();
   }
 
 private:
-  uint16_t x, a, b, c;
+  T x, a, b, c;
 };
 
 class LCG : public RNG
@@ -51,10 +51,11 @@ private:
   uint32_t r, a, c, m;
 };
 
-int testPeriod(XORShift& rng)
+template <typename T>
+int testPeriod(XORShift<T>& rng)
 {
-  uint16_t first = rng.getRnd();
-  int i = 1;
+  T first = rng.getRnd();
+  T i = 1;
   for(; rng.getRnd() != first; i++);
   return i;
 }
@@ -74,8 +75,8 @@ int main()
   LCG lcg2(1234,      137,   187, 256);
   LCG lcg3(123456789, 65539, 0,   2147483648);
   LCG lcg4(1234,      16807, 0,   2147483647);
-  XORShift xs1(123, 11, 1, 7);
-  XORShift xs2(123, 11, 4, 7);
+  XORShift<uint16_t> xs1(123, 11, 1, 7);
+  XORShift<uint16_t> xs2(123, 11, 4, 7);
   testRNG(lcg1, 1e5, "build/1.txt");
   testRNG(lcg2, 1e5, "build/2.txt");
   testRNG(lcg3, 1e5, "build/3.txt");
@@ -89,9 +90,9 @@ int main()
   {
     for(int c = 1; c <= 15; c++)
     {
-      XORShift xs(123, 11, b, c);
+      XORShift<uint16_t> xs(123, 11, b, c);
       //f << "b" << b << " c" << c << " " << testPeriod(xs) << " | ";
-      f << testPeriod(xs) << " ";
+      f << testPeriod<uint16_t>(xs) << " ";
     }
     f << std::endl;
   }
