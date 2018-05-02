@@ -1,0 +1,81 @@
+\input{../header.tex}
+
+\title{Blatt 1}
+\date{
+  Abgabe: 20.04.2018
+}
+
+
+\begin{document}
+%\maketitle
+
+\section*{Aufgabe 1}
+\subsection*{a)}
+\subsection*{b)}
+
+
+
+\section*{Aufgabe 2}
+\subsection*{a)}
+Die Zufallsvariable $Y$ muss im Intervall $[0,\frac{\pi}{2}]$ liegen,
+damit $P(y)=\sin(y)$ die zugehörige Verteilungsfunktion
+von der Dichtefunktion $p(y)=\cos(y)$ ist.
+\subsubsection*{i)}
+Transformationsmethode für Gleichverteilung U(x) im Intervall $[0,1]$
+\begin{align}
+  \int_0^u U(x)dx&=\int_0^y \cos(y')\symup{d}y'\\
+  u&=\sin(y)-\sin(0)
+  \arcsin(u)&=y
+\end{align}
+Einsetzen der Gleichverteiltenzahlen in $\arcsin(u)$
+liefert $\cos$-verteilte Zufallszahlen.
+
+\begin{figure}
+  \includegraphics{build/1.pdf}
+  \caption{Histogramm für i).}
+\end{figure}
+
+\subsubsection*{ii)}
+Transformationsmethode für Gleichverteilung U(x) im Intervall $[-1,1]$
+\begin{align}
+\frac{1}{2}\int_-1^u U(x)dx&=\int_0^y \cos(y')\symup{d}y'\\
+\frac{1}{2}(u+1)&=\sin(y)-\sin(0)
+\arcsin\left(\frac{1}{2}(u+1)\right)&=y
+\end{align}
+Einsetzen der Gleichverteiltenzahlen in $\arcsin\left(\frac{1}{2}(u+1)\right)$
+liefert $\cos$-verteilte Zufallszahlen.
+
+\begin{figure}
+  \includegraphics{build/2.pdf}
+  \caption{Histogramm für ii).}
+\end{figure}
+
+$\rightarrow$ Beide Methoden liefer gleiche Ergbnisse, Wobei die ii) umständicher
+ist, da das Intergral auf der Linkenseite zunächst berechnet werden muss vor die Inversefunktion
+berechnet werden kann.
+
+
+\subsection*{b)}
+Es werden zwei gleichverteilte Zufallszahlen $u_1,u_2$ im Intervall $[0,1]$
+benötigt und mit der Vorschrift
+\begin{align}
+  z_1=\sqrt{2\ln u_1}\cos(2\pi u_2)
+  z_2=\sqrt{2\ln u_1}\sin(2\pi u_2)
+\end{align}
+werden zwei standardnormalverteilte
+Zufallszahlen erzeugt.
+Um nun beliebige normalverteilte
+Zufallszahlen mit $\mu$ und $\sigma$ zu erzeugen
+wird die Formel
+\begin{align*}
+x_i= \mu +\sigma\cdot z_i
+\end{align*}
+verwendet.
+
+\begin{figure}
+  \includegraphics{build/3.pdf}
+  \caption{Histogramm von normalverteilten Zufallszahlen mit $\mu=3$ und $\sigma^2=4$.}
+\end{figure}
+\end{document}
+
+\subsection*{c)}
