@@ -1,8 +1,13 @@
+//CP Blatt 2, Aufgabe 1. Dag-Björn Hering und Lars Funke
+//Random number transformations
+
 #include <iostream>
 #include <fstream>
 #include <random>
 #include <functional>
 
+
+//transform uniform distribution to dist_to and save to file
 void sample_distribution(std::ofstream& file,
                          int samples,
                          std::uniform_real_distribution<> dist_from,
@@ -14,6 +19,7 @@ void sample_distribution(std::ofstream& file,
   }
 }
 
+//implement box muller algorithm
 void box_muller(std::ofstream& file, int samples, std::mt19937& rng, double sigma, double mu)
 {
   std::uniform_real_distribution<> dist(0, 1);
@@ -30,16 +36,19 @@ void box_muller(std::ofstream& file, int samples, std::mt19937& rng, double sigm
 
 int main()
 {
-  std::ofstream f_1;             //file to save results to
-  std::ofstream f_2;             //file to save results to
+  std::ofstream f_1;               //file to save results to
+  std::ofstream f_2;               //file to save results to
 	f_1.open ("build/output_1.txt"); //file to save results to
 	f_2.open ("build/output_2.txt"); //file to save results to
   std::mt19937 rng;
   int samples = 1e5;
 	rng.seed(std::random_device()());
+
+  //define transformation functions
   std::function<double(double)> function1 = [](double x){return asin(x) ;};
   std::function<double(double)> function2 = [](double x){return asin((0.5)*(x+1)) ;};
 
+  //apply transformation
   sample_distribution(f_1, samples, std::uniform_real_distribution<>(0, 1), function1, rng);
   sample_distribution(f_2, samples, std::uniform_real_distribution<>(-1, 1), function2, rng);
 

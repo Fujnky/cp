@@ -9,7 +9,7 @@ build/main.pdf: FORCE | build
 	  --halt-on-error \
 	main.tex
 
-zip: all | build
+zip: all build/main.pdf | build
 	mkdir -p build/zipfile
 	cp -R $(zip_inhalt) build/zipfile
 	sed '$$d' Makefile > build/zipfile/Makefile
