@@ -14,7 +14,7 @@ void unit_sphere()
 	rng.seed(std::random_device()());
 	std::uniform_real_distribution<> dist(-1, 1);
 
-  int points = 1e9;
+  int points = 1e7;
   int accumulator = 0;
 
   //iterate over samples
@@ -77,9 +77,9 @@ int main()
   std::function<double(double)> function2 = [](double x){return 1 / (sqrt(M_PI) * pow(cos(x), 2)) * exp(-pow(tan(x), 2));};
 
   std::cout << "Monte Carlo integration:" << std::endl;
-  std::cout << std::setprecision(8) << mc_integration(-M_PI / 2, atan(-1),     1e9, function2, rng) << std::endl;
-  std::cout << std::setprecision(8) << mc_integration(-M_PI / 2, atan(1.1631), 1e9, function2, rng) << std::endl;
-  std::cout << std::setprecision(8) << mc_integration(-M_PI / 2, M_PI / 2,     1e9, function2, rng) << std::endl;
+  std::cout << std::setprecision(8) << mc_integration(-M_PI / 2, atan(-1),     1e7, function2, rng) << std::endl;
+  std::cout << std::setprecision(8) << mc_integration(-M_PI / 2, atan(1.1631), 1e7, function2, rng) << std::endl;
+  std::cout << std::setprecision(8) << mc_integration(-M_PI / 2, M_PI / 2,     1e7, function2, rng) << std::endl;
 
   std::cout << "Simpson rule:" << std::endl;
   std::cout << std::setprecision(8) << simpson_integration(-M_PI / 2, atan(-1),     1e6, function2) << std::endl;
