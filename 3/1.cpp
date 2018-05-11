@@ -16,29 +16,20 @@ double ising0d(std::mt19937& rng, unsigned int samples, double H)
   int s = dist_initial_spin(rng);
 
   for(size_t i = 0; i < samples; i++){
-    //add up current spin for averaging
-    accumulator += s;
+    accumulator += s; //add up current spin for averaging
     double delta_E = s * 2 * H;
 
-    if(delta_E < 0) //ΔE < 0: flip
-      s *= -1;
-    else //ΔE > 0: roll the dice!
-    {
-      double p = dist(rng);
-      //flip spin if condition is met, else do nothing
-      s *= p < exp(-delta_E)? -1 : 1;
-    }
+    //flip spin if ΔE≤0 or random condition is met
+    s *= delta_E <= 0 || dist(rng) < exp(-delta_E) ? -1 : 1;
   }
-  //divide by samples to get mean from sum
-  return (double) accumulator / samples;
-}
 
+  return (double) accumulator / samples; //calculate mean
+}
 
 int main()
 {
   std::mt19937 rng;
 	rng.seed(std::random_device()());
-
   std::ofstream f;
   f.open("build/ising0d.txt");
 
