@@ -20,12 +20,11 @@ double ising0d(std::mt19937& rng, unsigned int samples, double H)
     accumulator += s;
     double delta_E = s * 2 * H;
 
-
     if(delta_E < 0) //ΔE < 0: flip
       s *= -1;
     else //ΔE > 0: roll the dice!
     {
-      double p = dist (rng);
+      double p = dist(rng);
       //flip spin if condition is met, else do nothing
       s *= p < exp(-delta_E)? -1 : 1;
     }
@@ -44,6 +43,6 @@ int main()
   f.open("build/ising0d.txt");
 
   //iterate through different magnetic field strenghts
-  for(double H = -5; H <= 5; H += (double) 10 / 1e4)
-    f << H << " " << ising0d(rng, 1e4, H) << std::endl;
+  for(double H = -5; H <= 5; H += (double) 10 / 1e3) //1e3 steps are enough
+    f << H << " " << ising0d(rng, 1e4, H) << std::endl; //1e4 samples are enough
 }

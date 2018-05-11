@@ -1,0 +1,27 @@
+\input{../header.tex}
+
+\title{Blatt 3}
+\date{
+  Abgabe: 11.05.2018
+}
+
+%\DeclareMathOperator{\Tr}{Tr}
+
+\begin{document}
+%\maketitle
+
+
+\section*{Aufgabe 1}
+\subsection*{a)}
+\begin{align*}
+  \mathcal H &= -sH \\
+  \symbf{s} &= \begin{pmatrix}1 & 0\\0 &-1\end{pmatrix}\\
+  \rho &= \frac1{\Tr (\symup e ^ {-\beta \mathcal{H}})} \symup e ^ {-\beta \mathcal{H}} \\
+  m &= \langle s \rangle = \Tr (\rho \cdot \symbf{s}) = \frac1{ 2 \cosh (\beta H)} \Tr \left(\begin{pmatrix}1 & 0\\0 & -1\end{pmatrix}\begin{pmatrix}\symup e ^ {\beta H} & 0\\0 & \symup e ^ {-\beta H} \end{pmatrix} \right) \\
+  &= \frac{2 \sinh(\beta H)}{2 \cosh(\beta H)} = \tanh(\beta H)
+\end{align*}
+
+\subsection*{b)}
+\fig{build/1.pdf}{}{}
+
+\end{document}
