@@ -5,10 +5,9 @@
 //simulate single spin in magnetic field at β = 1, return magnetization m = <s>
 double ising0d(std::mt19937& rng, unsigned int samples, double magnetic_field)
 {
-  std::discrete_distribution<> dist_initial_spin ({-1, 1});
   std::uniform_real_distribution<> dist_uniform (0, 1);
   int accumulator = 0;
-  int spin = dist_initial_spin(rng); //initialize spin randomly
+  int spin = dist_uniform(rng) < 0.5? -1 : 1; //initialize spin randomly
 
   for(size_t i = 0; i < samples; i++){
     accumulator += spin; //add up every round's spin for averaging
