@@ -1,7 +1,7 @@
 CC=g++
-OPT= -std=c++11 -O3
+OPT= -std=c++11 -O3 -larmadillo
 blatt_nummer=3a
-zip_inhalt=1.cpp 1.py build/main.pdf
+zip_inhalt=1.cpp 1.py 2.cpp 2.py build/main.pdf
 
 all: build/1 build/2
 latex: all build/main.pdf
@@ -13,9 +13,9 @@ build/1: 1.cpp 1.py | build
 	python3 1.py
 
 build/2: 2.cpp | build
-	@printf "\n\nAufgabe 2:\n"
+	@printf "Aufgabe 2:\n"
 	${CC} ${OPT} 2.cpp -o build/2
 	build/2
-#	python3 2.py
+	python3 2.py
 
 include ../Makefile_template.mk
