@@ -80,7 +80,7 @@ int main()
 {
   std::mt19937 rng;
   rng.seed(std::random_device()());
-  uint schweeps = 1e3; //equlibrium is reached after ~400 sweeps
+  uint schweeps = 1e3; //equilibrium is reached after ~400 sweeps
 
   arma::Mat<double> history(schweeps, 3);
   std::vector<double> kBT({1, 1.66, 2.33, 3});
@@ -89,10 +89,10 @@ int main()
   for(int init = 0; init <= 1; init++)
   for(const auto& temp : kBT)
   {
-    std::stringstream file;
-    file << "_" << std::fixed << std::setprecision(2) << temp << "_" << init;
-    ising2d(rng, schweeps, 100, temp, init, &history, nullptr).save("build/momentaufnahme"+file.str()+".mat", arma::arma_ascii);
-    history.save("build/history"+file.str()+".mat", arma::arma_ascii);
+    std::stringstream filename;
+    filename << "_" << std::fixed << std::setprecision(2) << temp << "_" << init;
+    ising2d(rng, schweeps, 100, temp, init, &history, nullptr).save("build/momentaufnahme"+filename.str()+".mat", arma::arma_ascii);
+    history.save("build/history"+filename.str()+".mat", arma::arma_ascii);
   }
 
   //iterate temperature steps to plot m(T) etc.
