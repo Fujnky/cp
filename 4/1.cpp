@@ -25,7 +25,6 @@ struct Position {
   }
 };
 
-
 //simulate 2D Ising model
 std::vector<double> wolff(std::mt19937& rng,
   unsigned int steps, size_t size,
@@ -139,7 +138,7 @@ int main(int argc, char* argv[])
     //iterate temperature steps to plot m(T) etc.
     uint q = atoi(argv[2]);
     double beta_c = 1 / J * log (1 + sqrt(q));
-    uint beta_steps = 40;
+    uint beta_steps = 70;
     uint steps = 2500;
     arma::Mat<double> results(beta_steps, 3);
     #pragma omp parallel for
