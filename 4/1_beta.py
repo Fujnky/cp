@@ -1,8 +1,11 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
+import sys
 
-beta, m, E = np.genfromtxt('build/beta.mat', unpack=True, skip_header=2)
+text = sys.stdin.readlines()
+q = np.genfromtxt([text[0]], unpack=True, dtype=int)
+beta, m, E = np.genfromtxt(text, unpack=True, skip_header=3)
 
 gs = gridspec.GridSpec(2, 1)
 ax0 = plt.subplot(gs[0, 0])
@@ -12,8 +15,11 @@ ax1 = plt.subplot(gs[1, 0])
 ax1.plot(beta, E, 'x', markersize=3)
 ax1.set_ylabel(r'$E(\beta)$')
 
+ax0.axvline(np.log(1+np.sqrt(q)), label='Kritischer Punkt')
+ax1.axvline(np.log(1+np.sqrt(q)), label='Kritischer Punkt')
+
 
 ax1.set_xlabel(r'$\beta$')
 ax0.legend(loc='best')
-plt.tight_layout(pad=0.2)
-plt.savefig('build/beta.pdf')
+#plt.tight_layout(pad=0.2)
+plt.savefig('build/beta_q{}.pdf'.format(q))
