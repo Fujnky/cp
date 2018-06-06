@@ -1,5 +1,5 @@
 CC=g++
-OPT= -std=c++11 -O3 -larmadillo -I/usr/include/eigen3 -fopenmp
+OPT= -std=c++11 -O3 -I/usr/include/eigen3 -fopenmp
 blatt_nummer=4
 zip_inhalt=1.cpp 1.py 1_beta.py build/main.pdf build/anim_q2.mp4 build/anim_q3.mp4
 

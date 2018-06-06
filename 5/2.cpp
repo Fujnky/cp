@@ -1,7 +1,7 @@
 #include <iostream>
 #include <bitset>
 #include <cmath>
-#include <eigen>
+#include <Eigen/Dense>
 
 using std::bitset;
 
@@ -19,7 +19,7 @@ void heisenberg(int S_z)
   }
 }
 
-
+//void e
 
 int main()
 {
