@@ -1,17 +1,28 @@
 #include <iostream>
 #include <bitset>
+#include <cmath>
+#include <eigen>
 
 using std::bitset;
 
 template<size_t N>
-void heisenberg(bitset<N>& spins, int S_z)
+void heisenberg(int S_z)
 {
-  std::cout << spins.count() << std::endl;
+  bitset<N> spins[1 << N];
+  //std::cout << spins[0].count() << std::endl;
+
+  //todo: generalize for arbitrary system sizes > 64bit
+  for(uint64_t i = 0; i < (1 << N); i++)
+  {
+    spins[i] = bitset<N>(i);
+    std::cout << spins[i] << std::endl;
+  }
 }
+
+
 
 int main()
 {
-  bitset<10> foo;
-  heisenberg(foo, 1);
+  heisenberg<4>(1);
   //heisenberg(4);
 }
