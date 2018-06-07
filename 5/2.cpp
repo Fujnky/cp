@@ -27,12 +27,12 @@ MatrixXd heisenberg(std::vector<std::pair<uint64_t, uint64_t>>& states, double J
     for(int i = 0; i < N; i++)
     {
       // coole bits operationen
-      auto new_state(state); // kann man auch besser machen
+      auto new_state(state);
       new_state[modulo(i+1, N)] = state[i];
       new_state[i] = state[modulo(i+1, N)];
       for(int n = 0; n < states.size(); n++)
       {
-        if(new_state.to_ullong() == states[n].first)
+        if(new_state.to_ullong() == state[i].to_ullong())
         Untermatrix(n, j)+= J/2;
       }
     }
@@ -91,7 +91,6 @@ void shizzle()
   //Eigen::Matrix2d mmmmm;
   //mmmmm << 0, 1, -1, 0;
   //cout << mmmmm.eigenvalues() << std::endl;
-
   //for(uint64_t i = 0; i < (1 << N); i++)
   //  cout << i << " " << m[i].first << " " << m[i].second << std::endl;
 
@@ -106,15 +105,11 @@ int main()
   //heisenberg(4);
 
 
-  //shizzle<2>();
-  //shizzle<4>();
-  //shizzle<6>();
-  //shizzle<8>();
-  //shizzle<10>();
-  //shizzle<12>();
+  shizzle<2>();
+  shizzle<4>();
+  shizzle<6>();
+  shizzle<8>();
+  shizzle<10>();
+  shizzle<12>();
   shizzle<14>();
-  shizzle<16>();
-  //Eigen::MatrixXd(65535ull, 65535ull> lol;
-  //shizzle<18>();
-
 }
