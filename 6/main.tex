@@ -1,0 +1,79 @@
+\input{../header.tex}
+
+\title{Blatt 6}
+\date{
+  Abgabe: 15.06.2018
+}
+
+%\DeclareMathOperator{\Tr}{Tr}
+
+\begin{document}
+\parindent0mm
+\section{Aufgabe 1.}
+\subsection{a)}
+
+\begin{align}
+q_{0_1} &=
+\begin{pmatrix}
+  1\\
+  1\\
+  1\\
+  1\\
+  1\\
+  1
+\end{pmatrix}
+\rightarrow
+\begin{pmatrix}
+  40    & 18.8237 &     0 &        0 &        0  &       0\\
+18.8237 & 21.4172 & 21.4482 &        0 &        0  &       0\\
+   0    & 21.4482 & 10.4161 &  4.33541 &        0  &       0\\
+   0    &    0    & 4.33541 & -4.58202 &   4.0623  &       0\\
+   0    &    0    &    0    &  4.0623  & -16.5567  &  2.0950\\
+   0    &    0    &    0    &     0    &  2.09502  & -8.6945
+\end{pmatrix}
+\\
+q_{0_2} &=
+\begin{pmatrix}
+  1\\
+  0\\
+  0\\
+  0\\
+  0\\
+  0
+\end{pmatrix}
+\rightarrow
+\begin{pmatrix}
+  9    &  27.1846 &       0 &       0 &       0 &       0\\
+27.1846&  36.5629 & 12.0216 &       0 &       0 &       0\\
+  0    &  12.0216 &-5.61397 & 13.1469 &       0 &       0\\
+  0    &    0     & 13.1469 & 16.2702 & 12.3381 &       0\\
+  0    &    0     &   0     & 12.3381 &-5.00198 & 1.54322\\
+  0    &    0     &   0     &   0     & 1.54322 &-9.21721
+\end{pmatrix}
+\end{align}
+
+\subsection{b)}
+\begin{align}
+\text{Eigenwerte (Lanczos): } &
+  \begin{matrix}
+    55.1544 &
+    26.1744 &
+   -18.3319 &
+    -10.478 &
+   -8.23601 &
+   -2.28298
+  \end{matrix}\\
+\text{Eigenwerte (Eigen):} &
+\begin{matrix}
+   55.1544&
+   26.1744&
+  -18.3319&
+   -10.478&
+  -8.23601&
+  -2.28298
+\end{matrix}
+\end{align}
+
+\subsection{c)}
+\includegraphics[width=\textwidth]{build/1.pdf}
+\end{document}
