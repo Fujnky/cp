@@ -38,5 +38,6 @@ public:
 int main() {
     function<array<double, 3>(double, array<double, 3>)> f = [](double t, array<double, 3> y){return array<double, 3>({t,t,t});};
     EulerODESolver<3> nummer1(f);
+    auto result = nummer1(333);
 	return EXIT_SUCCESS;
 }
