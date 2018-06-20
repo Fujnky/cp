@@ -1,0 +1,5 @@
+cmake_minimum_required (VERSION 2.6)
+project (Blatt7)
+find_package (Eigen3 3.3 REQUIRED NO_MODULE)
+add_executable(1 1.cpp)
+target_link_libraries (1 Eigen3::Eigen)
