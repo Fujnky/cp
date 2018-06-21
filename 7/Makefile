@@ -1,5 +1,5 @@
 CC=g++
-OPT= -std=c++11 -O3 -I/usr/include/eigen3
+OPT= -ggdb -std=c++11 -O3 -I/usr/include/eigen3
 blatt_nummer=7
 zip_inhalt=1.cpp 1.py build/main.pdf
 
