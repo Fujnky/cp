@@ -1,4 +1,4 @@
-//CP Blatt 7, Aufgabe 1. Dag-Björn Hering und Lars Funke: Euler & Runge-Kutta
+//CP Blatt 7, Aufgabe 1&2. Dag-Björn Hering und Lars Funke: Euler & Runge-Kutta
 #include <iostream>
 #include <functional>
 #include <Eigen/Dense>
@@ -7,19 +7,14 @@
 using std::function;
 using namespace Eigen;
 
+//Abstrakte Klasse für numerische DGL-Löser
 class ODESolver {
 public:
-    ODESolver(const function<VectorXd(double, VectorXd)> &f, uint order, uint dim) : order(order), dim(dim) {
-        shift_and_apply = [=](double t, VectorXd y) -> VectorXd {
-            VectorXd F(order * dim);
-            F << y.tail(dim * (order - 1)), f(t, y.head(dim));
-            return F;
-        };
-    };
-
-    virtual MatrixXd operator()(MatrixXd initial, double duration, uint steps) = 0;
+    ODESolver(const function<VectorXd(double, VectorXd)> &f, uint order, uint dim) : f(f), order(order), dim(dim) {};
+    virtual MatrixXd operator()(MatrixXd initial, double duration, uint steps) = 0; //solution
 
 protected:
+    //Matrix initialisieren
     MatrixXd initialize(MatrixXd &initial, double duration, uint steps) {
         assert(initial.rows() == order && initial.cols() == dim);
         initial.transposeInPlace();
@@ -29,11 +24,19 @@ protected:
         return Y;
     }
 
-    function<VectorXd(double, VectorXd)> shift_and_apply;
+    //y-Vektor verschieben und f anwenden. (Trafo auf 1. Ordnung)
+    VectorXd shift_and_apply(double t, VectorXd y) {
+        VectorXd F(order * dim);
+        F << y.tail(dim * (order - 1)), f(t, y.head(dim));
+        return F;
+    }
+
+    function<VectorXd(double, VectorXd)> f;
     uint order;
     uint dim;
 };
 
+//Erbende Klassen implementieren verschiedene Verfahren
 class EulerODESolver : public ODESolver {
 public:
     using ODESolver::ODESolver;
@@ -101,12 +104,57 @@ int main() {
 
     // Aufgabe 2
     double G = 1;
-    RungeKutta4ODESolver kepler([G](double t, VectorXd r) { return -(G * r) / pow(r.norm(), 3); }, 2, 3);
+    double alpha = 1;
+    RungeKutta4ODESolver kepler([G, &alpha](double t, VectorXd r) {
+      return -(alpha * G * r) / pow(r.norm(), alpha+2);
+    }, 2, 3);
     MatrixXd kepler_init(2, 3);
-    kepler_init << 1, 0,   0,
-                   0, 1.1, 0;
+    kepler_init << 1,   0, 0,  //     x,   y,   z
+                   0, 1.1, 0;  //   v_x, v_y, v_z
+
+    MatrixXd kepler_mars(2, 3);
+    kepler_mars << -1.1,  0, 0,
+                    0,  1.2, 0;
 
     std::ofstream kepler_file("build/rk4_kepler.txt");
-    kepler_file << kepler(kepler_init, 500, 100000);
+    kepler_file << kepler(kepler_init, 500, 20000);
+
+    std::ofstream kepler_file2("build/rk4_kepler2.txt");
+    kepler_file2 << kepler(kepler_mars, 500, 20000);
+
+    alpha = 1.1;
+    std::ofstream kepler_alpha1("build/rk4_kepler_alpha_1.1.txt");
+    kepler_alpha1 << kepler(kepler_init, 500, 20000);
+
+    alpha = 0.9;
+    std::ofstream kepler_alpha2("build/rk4_kepler_alpha_0.9.txt");
+    kepler_alpha2 << kepler(kepler_init, 500, 20000);
+
+    // d/e)
+    double m1, m2, m3;
+    m1 = m2 = m3 = 1;
+    RungeKutta4ODESolver threebody([G,m1,m2,m3](double t, VectorXd r) {
+      //Implementation eines Dreikörperproblems als 9D-System
+      VectorXd r1 = r.head(3);
+      VectorXd r2 = r.segment(3, 3);
+      VectorXd r3 = r.tail(3);
+      VectorXd result(9);
+      result << -G * m2 * (r1 - r2) / pow((r1 - r2).norm(), 3)
+                -G * m3 * (r1 - r3) / pow((r1 - r3).norm(), 3),
+                -G * m3 * (r2 - r3) / pow((r2 - r3).norm(), 3)
+                -G * m1 * (r2 - r1) / pow((r2 - r1).norm(), 3),
+                -G * m1 * (r3 - r1) / pow((r3 - r1).norm(), 3)
+                -G * m2 * (r3 - r2) / pow((r3 - r2).norm(), 3);
+      return result;
+    }, 2, 9);
+
+    MatrixXd threebody_init(2, 9);
+    // Die angegebenen Anfangsbedingungen haben leider nicht funktioniert.
+    // Mit diesen Werten sieht es wenigstens lustig aus :)
+    //                 Sonne             Planet               Mond
+    threebody_init << 1, 0, 0,           0,  1, 0,            0, 0,  1.00000002,
+                      1, 0, 0.0000006,  -1, -1, 0.20000001,   0, 0, -0.5;
+    std::cout << threebody(threebody_init, 120, 10000);
+
     return EXIT_SUCCESS;
 }
