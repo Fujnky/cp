@@ -1,8 +1,8 @@
 \input{../header.tex}
 
-\title{Blatt 7}
+\title{Blatt 8}
 \date{
-  Abgabe: 15.06.2018
+  Abgabe: 28.06.2018
 }
 
 %\DeclareMathOperator{\Tr}{Tr}
@@ -10,15 +10,60 @@
 \begin{document}
 \parindent0mm
 \section*{Aufgabe 1}
-\subsection*{a)}
-\includegraphics[width=\textwidth]{build/energie.pdf}
-Schrittweite: $h = \frac{1}{200}$
-\subsection*{b)}
-\includegraphics[width=\textwidth]{build/plot.pdf}
-\section*{Aufgabe 2}
-\includegraphics[width=\textwidth]{build/kepler_plot.pdf}
-\includegraphics[width=\textwidth]{build/kepler_energie.pdf}
-\includegraphics[width=\textwidth]{build/kepler2.pdf}
-\includegraphics[width=\textwidth]{build/threebody.pdf}
 
+\subsection*{a)}
+\begin{align}
+\intertext{Kinetische Energie:}
+T &= \frac{1}{2}m_1\dot{\theta}^2 L_1^2 + \frac{1}{2}\left(m_2 \dot{\theta_2}^2 L_2 + m_2 \dot{\theta_1}^2 L_1 + 2 m_2 \dot{\theta_1}^2 L_1 \dot{\theta_2}^2 L_2 \cos(\theta_1 -\theta_2)\right)
+\intertext{Potentielle Energie:}
+V &= -m_1g_L1 \cos(\theta_1)-m_2gL_1 \cos(\theta_1) -m_2gL_2\cos(\theta_2)
+\end{align}
+\subsection*{b)}
+Nährung liefert:
+
+\begin{align}
+ \ddot{\theta}_1 &= \frac{1}{1-\mu}\left( \mu g_1 \theta_2 -g_1 \theta_1\right)\\
+ \ddot{\theta}_2 &= \frac{1}{1-\mu}\left( g_2 \theta_1 -g_2\theta_2\right)
+\intertext{In Matrixform:}
+\begin{pmatrix}
+ \ddot{\theta}_1\\
+ \ddot{\theta}_2
+\end{pmatrix}
+&= \frac{1}{1-\mu}
+\begin{pmatrix}
+-g_1    & \mu g_1 \\
+ g_2    &    -g_2
+\end{pmatrix}
+\begin{pmatrix}
+\theta_1\\
+ \theta_2
+\end{pmatrix}
+\end{align}
+
+\subsection*{c/d)}
+Siehe \texttt{anim.mp4}. Die angegebenen Startbedingungen waren uns zu öde, daher haben wir spannendere gewählt.
+%
+% \begin{align}
+% \intertext{mit den Eigenwerten $\lambda$ für $\mu=\frac{1}{2}$:}
+% \lambda_{1/2} =  - \left(g_1+g_2\right)\pm\sqrt{g_1^2+g_2^2}
+% \intertext{somit folgt für die DGLn:}
+%  \ddot{\theta}_1 -\lambda_1 \theta_1 &=0\\
+%  \ddot{\theta}_2 -\lambda_2 \theta_2 &=0
+% \intertext{mit den Lösungen:}
+% \theta_1(t) = a_1 \cos(\sqrt{-\lambda_1} t)
+% \theta_2(t) = a_2 \cos(\sqrt{-\lambda_2} t)
+% \end{pmatrix}
+% \end{align}
+%
+%
+
+
+
+
+
+\section*{Aufgabe 2}
+\includegraphics[width=0.9\textwidth]{build/poincaré_+.txt.pdf}\\
+\includegraphics[width=0.9\textwidth]{build/poincaré_chaos.txt.pdf}\\
+\includegraphics[width=0.9\textwidth]{build/poincaré_quasi.txt.pdf}\\
+\includegraphics[width=0.9\textwidth]{build/euclid.pdf}
 \end{document}
